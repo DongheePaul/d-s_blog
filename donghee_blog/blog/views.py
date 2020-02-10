@@ -44,3 +44,12 @@ def post_add(request):
         return redirect(post_detail, pk=posts_pk)
     elif request.method == 'GET':
         return render(request, 'blog/post_add.html')
+        
+def post_delete(request, pk):
+    if request.method == 'POST':
+        post = Post.objects.get(pk=pk)
+        post.delete()
+        return render(request, 'blog/post_delete.html')
+
+    elif request.method == 'GET':
+        return HttpResponse('잘못된 접근 입니다.')
