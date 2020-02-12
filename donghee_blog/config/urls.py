@@ -15,18 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from blog.views import post_list, post_detail, post_add, post_delete
+from blog.views import post_list, post_detail, post_add, post_delete, post_edit
 from django.conf.urls.static import static
 from django.conf import settings
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', post_list),
     path('post/<int:pk>/', post_detail),
     path('post/add/', post_add, name='post_add'),
-    path('post/<int:pk>/delete', post_delete, name='post_delete')
+    path('post/<int:pk>/delete', post_delete, name='post_delete'),
+    path('post/edit/', post_edit, name='post_edit'),
 ]
 
 urlpatterns += static(
