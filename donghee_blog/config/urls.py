@@ -25,7 +25,7 @@ urlpatterns = [
     path('post/<int:pk>/', post_detail),
     path('post/add/', post_add, name='post_add'),
     path('post/<int:pk>/delete', post_delete, name='post_delete'),
-    path('post/edit/', post_edit, name='post_edit'),
+    path('post/<int:pk>/edit/', post_edit, name='post_edit'),
 ]
 
 urlpatterns += static(
