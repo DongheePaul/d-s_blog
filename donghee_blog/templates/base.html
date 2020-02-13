@@ -13,9 +13,11 @@
 <body>
     <div class="header">
         <a class="home" href="/"><h1>Donghee's Blog!</h1></a>
+        {% if user.is_authenticated %}
         <a class="add-post" href="{% url 'post_add' %}">
             <button type="button" class="btn btn-info">Add Post</button>
         </a>
+        {% endif %}
     </div>
     {% block content %}
     {% endblock %}
