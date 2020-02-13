@@ -6,11 +6,14 @@
     <h2 class="post-add">새 글 작성</h2>
     <div class="container">
         <div class="form-group">
+        {% if user.is_authenticated %}
         <table>
             {{ form.as_table }}
         </table>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">글 등록</button>
     </div>
+    {% endif %}
+
 </form>
 {% endblock %}

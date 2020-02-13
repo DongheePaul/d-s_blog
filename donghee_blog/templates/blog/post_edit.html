@@ -4,6 +4,7 @@
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <h2 class="post-add">글 수정</h2>
+    {% if user.is_authenticated %}
     <div class="container">
         <div class="form-group">
         <table>
@@ -12,5 +13,6 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg">수정</button>
     </div>
+    {% endif %}
 </form>
 {% endblock %}
