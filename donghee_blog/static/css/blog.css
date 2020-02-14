@@ -1,12 +1,15 @@
 .header {
     background-color: #3F5FA5;
     color: white;
-    padding: 20px 30px;
+    padding: 10px 30px;
     border-bottom: 1px solid #3D3D3D;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 
 }
 
+.post-add{
+    margin-left : 20px;
+}
 .header h1 {
     font-size: 40px;
     font-weight: bolder;
@@ -55,8 +58,14 @@ a:hover {
     float: right;
 }
 
-.add-post {
+.add-post-button {
     position: absolute;
-    right: 50px;
+    right: 120px;
+    top: 30px;
+}
+
+.log-out {
+    position: absolute;
+    right: 30px;
     top: 30px;
 }

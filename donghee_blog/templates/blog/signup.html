@@ -5,19 +5,19 @@
     <h1>회원가입</h1>
     <form method="post" class = "form-group">
         {% csrf_token %} 
-        Username :
+        이름 :
         <br>
         <input name="username" type = "text">
         <br>
-        Password :
+        비밀번호 :
         <br>
         <input name="password1" type = "password">
         <br>
-        Confirm Password:
+        비밀번호 확인 :
         <br>
         <input name="password2" type = "password">
         <br><br>
-        <button type="submit" class="btn btn-success">Register</button>
+        <button type="submit" class="btn btn-success">회원가입</button>
     </form>
 </div>
 {% if messages %}

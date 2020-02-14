@@ -7,33 +7,32 @@
             <h3>{{ post.title }}</h3>
             <div class="content">{{ post.content|linebreaksbr }}</div>
             {% if post.mainphoto %}
-                <img src = "{{ post.mainphoto.url }}">
+                <img src = "{{ post.mainphoto.url }}" style="max-width: 100%; height: auto;">
             {% endif %}
         </li>
     </ul>
     <ul class="list">
             <a href="/">
-                <button type="button" class="btn btn-primary to-main">To Main</button>
+                <button type="button" class="btn btn-primary to-main">메인으로</button>
             </a>
             <br>
                 {% if user.is_authenticated and user == post.author %}
             <a  href="{% url 'post_edit' pk=post.pk %}">
-                <buttun type = "button" class="btn btn-success">Edit</buttun>
+                <buttun type = "button" class="btn btn-success">수정하기</buttun>
             </a>
             <form action="{% url 'post_delete' pk=post.pk %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Delete Post</button>
+                <button type="submit" class="btn btn-danger">삭제하기</button>
             </form>
                 {% endif %}
     </ul>
 </div>
-
+<hr width = "90%" color = "black" size = "10px">
 <div class="container">
     {% for comment in post.comments.all %}
     <div class="comment-list">
-        <a >{{ comment.author }}</a>
-        <small>{{ comment.created_date }}</small>
-        {% if comment.author == request.user %}<a href="{% url 'comment_remove' pk=post.pk cpk=comment.pk%}">삭제</a>{% endif %}
+        <strong>{{ comment.author }}</strong>{% if comment.author == request.user %}<a href="{% url 'comment_remove' pk=post.pk cpk=comment.pk%}"> 삭제</a>{% endif %}
+        <div class="date">{{ comment.created_date }}</div>
         <p>{{ comment.text|linebreaks }}</p>
     </div>
     {% empty %}
