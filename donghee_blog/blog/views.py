@@ -6,7 +6,9 @@ from django.views.generic import CreateView
 from .form import PostForm, UserForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.contrib import auth
+from django.contrib import auth, messages
+from django.core.paginator import Paginator
+
 
 #회원가입. 
 def signup(request):
@@ -17,15 +19,17 @@ def signup(request):
                 username = request.POST["username"], 
                 password = request.POST["password1"])
             return redirect(post_list)
+        else:
+            messages.info(request, '입력한 비밀번호를 확인하세요')
         return render(request, 'blog/signup.html')
     return render(request, 'blog/signup.html') #4
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__isnull=False).order_by('-created_date')  # 수정된 부분
-    context = {
-        'posts': posts,
-    }
-    return render(request, 'blog/post_list.html', context)
+    posts = Post.objects.filter(published_date__isnull=False).order_by('-created_date') 
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    pageposts = paginator.get_page(page)
+    return render(request, 'blog/post_list.html', {'posts':posts,'pageposts':pageposts})
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
@@ -40,6 +44,7 @@ def post_add(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            post.author = models.User.objects.get(username=request.user.get_username())  
             post.published_date = timezone.now()
             post.save()
             # 기본키를 전달한 post_detail 뷰를 redirect 함수에 전달.

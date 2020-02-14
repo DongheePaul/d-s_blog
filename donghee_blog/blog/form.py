@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['author', 'title', 'mainphoto', 'content',]
+        fields = [ 'title', 'mainphoto', 'content',]
 
 class UserForm(UserCreationForm):
     class Meta:

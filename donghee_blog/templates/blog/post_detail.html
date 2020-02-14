@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-primary to-main">To Main</button>
     </a>
     <br>
-    {% if user.is_authenticated %}
+        {% if user.is_authenticated and user == post.author %}
 
     <a  href="{% url 'post_edit' pk=post.pk %}">
         <buttun type = "button" class="btn btn-success">Edit</buttun>
@@ -21,6 +21,6 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete Post</button>
     </form>
-    {% endif %}
+        {% endif %}
 </div>
 {% endblock %}

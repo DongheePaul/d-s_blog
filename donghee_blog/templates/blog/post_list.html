@@ -4,7 +4,7 @@
 <div class="recent">Recent Posts</div>
 <div class="container">
     <ul class="list">
-        {% for post in posts %}
+        {% for post in pageposts %}
         <li class="item">
             <h3><a href="/post/{{post.pk}}">{{ post.title }}</a></h3>
             <div class="content">{{ post.content|truncatewords:50 }}</div>
@@ -15,5 +15,31 @@
         </li>
         {% endfor %}
     </ul>
+</div>
+
+<div class="container"> 
+    {% if pageposts.has_other_pages %}
+        <ul class = "pagination">
+        {% if pageposts.has_previous %}
+            <li><a href="?page={{ pageposts.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class = "disabled"><span>&laquo;</span></li>
+        {% endif %}
+        
+        {% for i in pageposts.paginator.page_range %}
+            {% if pageposts.number == i %}     
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        
+        {% if pageposts.has_next %}  
+            <li><a href="?page={{ pageposts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {%endif %}
+        </ul>
+    {%endif%}
 </div>
 {% endblock %}
