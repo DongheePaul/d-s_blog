@@ -6,35 +6,29 @@
         <li class="item">
             <h3>{{ post.title }}</h3>
             <div class="content">{{ post.content|linebreaksbr }}</div>
+            {% if post.mainphoto %}
+                <img src = "{{ post.mainphoto.url }}">
+            {% endif %}
         </li>
     </ul>
-    <a href="/">
-        <button type="button" class="btn btn-primary to-main">To Main</button>
-    </a>
-    <br>
-        {% if user.is_authenticated and user == post.author %}
-    <a  href="{% url 'post_edit' pk=post.pk %}">
-        <buttun type = "button" class="btn btn-success">Edit</buttun>
-    </a>
-    <form action="{% url 'post_delete' pk=post.pk %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete Post</button>
-    </form>
-        {% endif %}
+    <ul class="list">
+            <a href="/">
+                <button type="button" class="btn btn-primary to-main">To Main</button>
+            </a>
+            <br>
+                {% if user.is_authenticated and user == post.author %}
+            <a  href="{% url 'post_edit' pk=post.pk %}">
+                <buttun type = "button" class="btn btn-success">Edit</buttun>
+            </a>
+            <form action="{% url 'post_delete' pk=post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete Post</button>
+            </form>
+                {% endif %}
+    </ul>
 </div>
 
-
-{% if request.user.is_active %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">댓글 작성</button>
-</form>
-{% else %}
-<div class="alert alert-warning">로그인된 사용자만 댓글을 작성할 수 있습니다.</div>
-{% endif %}
-
-<div id="comment">
+<div class="container">
     {% for comment in post.comments.all %}
     <div class="comment-list">
         <a >{{ comment.author }}</a>
@@ -47,6 +41,16 @@
         <p>작성된 댓글이 없습니다!</p>
     </div>
     {% endfor %}
+
+    {% if request.user.is_active %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">댓글 작성</button>
+    </form>
+    {% else %}
+    <div class="alert alert-warning">로그인된 사용자만 댓글을 작성할 수 있습니다.</div>
+{% endif %}
 </div>
 
 {% endblock %}

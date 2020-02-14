@@ -8,6 +8,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = [ 'title', 'mainphoto', 'content',]
 
+
 class UserForm(UserCreationForm):
     class Meta:
         model = User

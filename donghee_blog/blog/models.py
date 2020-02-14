@@ -1,12 +1,23 @@
 from django.conf import settings
 from django.db import models
+from uuid import uuid4
 from django.utils import timezone
+import os
+
+def date_upload_to(instance, filename):
+  # 길이 32 인 uuid 값
+  uuid_name = uuid4().hex
+  # 확장자 추출
+  extension = os.path.splitext(filename)[-1].lower()
+  filename_changed = uuid_name + extension
+  # 결합 후 return
+  return filename_changed
 
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    mainphoto = models.ImageField(blank=True, null=True)    
+    mainphoto = models.ImageField(blank=True, null=True, upload_to=date_upload_to)    
     content = models.TextField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(blank=True, null=True)
