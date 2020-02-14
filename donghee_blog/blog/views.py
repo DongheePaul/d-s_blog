@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from blog.models import Post
+from blog.models import Post, Comment
 from django.contrib.auth import get_user_model, views, models, login
 from django.views.generic import CreateView 
-from .form import PostForm, UserForm
+from .form import PostForm, UserForm, CommentForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
@@ -33,10 +33,34 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
+    #댓글 작성 request가 들어오면
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect(post_detail, pk=pk)
+    #댓글 작성 request가 아니고, post_list에서 게시물 클릭 시
+    else:
+        #댓글 작성 form을 불러온다
+        form = CommentForm()
+    
     context = {
-        'post': post
+        'post': post,
+        'form' : form
     } 
     return render(request, 'blog/post_detail.html', context)
+
+def comment_remove(request, pk, cpk):
+    post = get_object_or_404(Post, pk=pk)
+    comment = Comment.objects.get(pk=cpk)
+    if not comment.author == request.user:
+        return redirect(post_detail, pk=pk)
+    else:
+        comment.delete()
+        return redirect(post_detail, pk=pk)
 
 @login_required
 def post_add(request):

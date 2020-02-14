@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from blog.views import post_list, post_detail, post_add, post_delete, post_edit, signup
+from blog.views import post_list, post_detail, post_add, post_delete, post_edit, signup, comment_remove
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
@@ -30,6 +30,8 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name="login"),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('join/', signup, name='join'),
+    path('post/<int:pk>/comment/<int:cpk>/remove', comment_remove, name='comment_remove'),
+
 
 ]
 
