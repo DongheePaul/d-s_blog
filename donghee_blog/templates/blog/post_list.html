@@ -7,7 +7,7 @@
         {% for post in pageposts %}
         <li class="item">
             <h3><a href="/post/{{post.pk}}">{{ post.title }} {% if post.mainphoto %}<img src="/static/image_icon.jpg" style="max-width: 15px; height: auto;">{% endif %}</a></h3>
-            <div class="content">{{ post.content| truncatewords:10 }}</div>
+            <div class="content">{{ post.content| truncatechars:30}}</div>
             <div class="info">
                 <div class="published-date"><span>작성일 | </span>{{ post.published_date }}</div>
                 <div class="author"><span>작성자 | </span>{{ post.author }}</div>
