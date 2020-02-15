@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 
 #회원가입. 
@@ -18,6 +19,7 @@ def signup(request):
             user = models.User.objects.create_user(
                 username = request.POST["username"], 
                 password = request.POST["password1"])
+            messages.info(request, '회원가입을 환영합니다! 로그인 후 글을 남겨보세요.')
             return redirect(post_list)
         else:
             messages.info(request, '입력한 비밀번호를 확인하세요')

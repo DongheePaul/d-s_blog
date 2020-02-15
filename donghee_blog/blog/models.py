@@ -4,6 +4,7 @@ from uuid import uuid4
 from django.utils import timezone
 import os
 
+#업로드될 이미지의 파일명을 난수로 변경해 리턴
 def date_upload_to(instance, filename):
   # 길이 32 인 uuid 값
   uuid_name = uuid4().hex

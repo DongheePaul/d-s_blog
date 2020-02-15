@@ -31,6 +31,17 @@
         </a>
         {% endif %}
     </div>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="row" style="margin:20px auto;">
+        <div class="col-sm-12">
+            <div class="alert alert-info">
+            <strong>{{ message.message }}</strong> 
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+    {% endif %}
     {% block content %}
     {% endblock %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
