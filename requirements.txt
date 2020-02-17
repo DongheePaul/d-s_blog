@@ -7,8 +7,12 @@ botocore==1.14.0
 celery==4.4.0
 decorator==4.4.1
 Django==3.0.2
+django-appconf==1.0.3
 django-extensions==2.2.5
+django-imagekit==4.0.2
 django-storages==1.8
+djangorestframework==3.11.0
+djangorestframework-jwt==1.11.0
 docutils==0.15.2
 ipython==7.11.1
 ipython-genutils==0.2.0
@@ -18,12 +22,14 @@ kombu==4.6.7
 parso==0.5.2
 pexpect==4.7.0
 pickleshare==0.7.5
+pilkit==2.0
 Pillow==7.0.0
 prompt-toolkit==3.0.2
 psycopg2==2.8.4
 psycopg2-binary==2.8.4
 ptyprocess==0.6.0
 Pygments==2.5.2
+PyJWT==1.7.1
 python-dateutil==2.8.1
 pytz==2019.3
 s3transfer==0.3.0

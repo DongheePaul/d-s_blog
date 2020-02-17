@@ -10,6 +10,22 @@ from django.contrib import auth, messages
 from django.core.paginator import Paginator
 from django.contrib import messages
 
+#api & jwt 관련
+from django.core import serializers
+from rest_framework.decorators import api_view, permission_classes, authentication_classes  #데코레이터는 간단히 말하면 전처리.
+from rest_framework.permissions import IsAuthenticated  #로그인 여부를 확인할 때 사용한다.
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication  #JWT 인증을 확인하기 위해 사용.
+
+
+@api_view(['GET'])  #def posts(request) 실행 전에 먼저 실행됨. GET 요청인지 확인 후 아니라면 error 반환
+@permission_classes((IsAuthenticated, ))    #권한을 체크함. 여기서는 로그인 했는지 여부만 확인.
+@authentication_classes((JSONWebTokenAuthentication,))  #jwt 토큰을 확인.
+def posts(request):
+    posts = Post.objects.filter(
+        published_date__isnull=False).order_by('-created_date') 
+    #json 형태로 직렬화(serializeration)
+    post_list = serializers.serialize('json', posts)
+    return HttpResponse(post_list, content_type="text/json-comment-filtered")
 
 #회원가입. 
 def signup(request):
