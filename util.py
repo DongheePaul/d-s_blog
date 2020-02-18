@@ -2,7 +2,7 @@ import json
 
 
 def get_server_info_value(key: str):
-    with open('config/secret/server_info.json', mode='rt', encoding='utf-8') as file:
+    with open('/srv/donghee_blog/server_info.json', mode='rt', encoding='utf-8') as file:
         data = json.load(file)
         for k, v in data.items():
             if k == key:
