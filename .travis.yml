@@ -4,7 +4,8 @@ python:
 install:
 - pip install -r requirements.txt
 script:
-- python donghee_blog/manage.py test
+- cd donghee_blog
+- python -m pytest
 before_install:
 - openssl aes-256-cbc -K $encrypted_c050433c86ed_key -iv $encrypted_c050433c86ed_iv
   -in server_info.json.enc -out server_info.json -d
