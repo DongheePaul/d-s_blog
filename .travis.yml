@@ -26,4 +26,6 @@ before_install:
   -in server_info.json.enc -out server_info.json -d
 
 before_script:
-- psql -c 'create database db_donghee;' -U postgres
+- cp database.yml.travis database.yml
+- psql -c "create database db_donghee;" -U postgres
+- psql -c "CREATE USER donghee WITH PASSWORD '1234';" -U postgres
