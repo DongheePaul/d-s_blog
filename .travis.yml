@@ -18,7 +18,7 @@ development:
 script:
 - cd donghee_blog
 - ./manage.py migrate
-- ./manage.py migrate Post Comment
+- ./manage.py migrate blog
 - python -m pytest
 
 before_install:
