@@ -30,4 +30,4 @@ before_script:
 - psql -c "create database db_donghee;" -U postgres
 - psql -c "CREATE USER donghee WITH PASSWORD '1234';" -U postgres
 - psql -c "ALTER USER donghee CREATEDB;"
-- psql -C "GRANT ALL PRIVILEGES ON DATABASE db_donghee to donghee;"
+- psql -c "GRANT ALL PRIVILEGES ON DATABASE db_donghee to donghee;"
